@@ -136,14 +136,12 @@ Window::Window()
 	WidgetGroup * wdgGroup9 = new WidgetGroup(new QSpinBox, "Others");
 	WidgetGroup * wdgGroup10 = new WidgetGroup(new QSpinBox, "Label with some more text:", QBoxLayout::RightToLeft);
 
-
 	/*
 	 * Add all widget groups to layout block 2
 	 */
 
 	block2->addWidget(wdgGroup9, 0, 0);
 	block2->addWidget(wdgGroup10, 1, 0);
-
 
 	/*
 	 * Setup floating layout and add all blocks to that

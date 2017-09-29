@@ -13,7 +13,8 @@ layoutblock::layoutblock() : QWidget()
 	m_layout->setSpacing(4);
 
 	this->setLayout(m_layout);
-	this->setFixedSize(300,90);
+//	this->setFixedSize(300,90);
+	this->setFixedHeight(90);
 	this->setBackgroundRole(QPalette::Base);
 	this->setAutoFillBackground(true);
 

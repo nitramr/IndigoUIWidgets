@@ -13,3 +13,5 @@ SOURCES     = flowlayout.cpp \
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/layouts/flowlayout
 INSTALLS += target
+
+FORMS +=

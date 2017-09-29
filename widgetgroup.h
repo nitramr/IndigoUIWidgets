@@ -7,6 +7,7 @@
 
 class WidgetGroup : public QWidget
 {
+
 private:
 	QBoxLayout * m_layout;
 	QWidget * m_child;
@@ -16,10 +17,11 @@ private:
 
 public:
 
-	WidgetGroup(QWidget *child = NULL, QString text = "", QBoxLayout::Direction direction = QBoxLayout::TopToBottom);
-	void addWidget(QWidget * child);
+	explicit WidgetGroup(QWidget *child = NULL, QString text = "", QBoxLayout::Direction direction = QBoxLayout::TopToBottom);
+	void setWidget(QWidget * child);
 	void setLabel(QString text);
 	void setDirection(QBoxLayout::Direction direction);
+	QWidget *widget();
 };
 
 #endif // WIDGETGROUP_H
