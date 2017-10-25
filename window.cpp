@@ -52,107 +52,67 @@
 
 #include "flowlayout.h"
 #include "window.h"
-#include "layoutblock.h"
+#include "sclayoutsegment.h"
+#include "sclayoutsection.h"
 #include "widgetgroup.h"
+#include "sc_seg_xyz_position.h"
+#include "sc_seg_xyz_transform.h"
+#include "sc_seg_xyz_advanced.h"
+#include "sc_seg_shape.h"
+#include "sc_seg_fills.h"
+#include "sc_seg_lines.h"
+#include "sc_seg_dropshadow.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpinBox>
-//! [1]
+#include <QDebug>
+#include <QStyleFactory>
+
 Window::Window()
 {
 
 	/*
-	 * Setup all needed controls
-	 */
-
-	QPushButton *button1 = new QPushButton("&&");
-	button1->setFixedSize(22,22);
-	QPushButton *button2 = new QPushButton(" ");
-	button2->setFixedSize(22,22);
-	QPushButton *button3 = new QPushButton(" ");
-	button3->setFixedSize(22,22);
-
-
-	QLabel *label3 = new QLabel("Width");
-	label3->setAlignment(Qt::AlignCenter);
-	QLabel *label4 = new QLabel("Height");
-	label4->setAlignment(Qt::AlignCenter);
-	QLabel *label5 = new QLabel("");
-	label5->setFixedSize(64,64);
-	label5->setStyleSheet("background:#f0f0f0;");
-	QLabel *label6 = new QLabel("Origin");
-	label6->setAlignment(Qt::AlignCenter);
-
-	/*
-	 * Setup first layout block
-	 */
-
-	layoutblock * block1 = new layoutblock;
-	QGridLayout * block1layout = block1->getLayout();
-	block1layout->setRowStretch(0,1);
-
-	/*
-	 * Setup all widget groups for layout block 1
-	 */
-
-	WidgetGroup * wdgGroup1 = new WidgetGroup(new QSpinBox, "X");
-	WidgetGroup * wdgGroup2 = new WidgetGroup(new QSpinBox, "Y");
-	WidgetGroup * wdgGroup3 = new WidgetGroup(label5, "Origin");
-	WidgetGroup * wdgGroup4 = new WidgetGroup(button2);
-	WidgetGroup * wdgGroup5 = new WidgetGroup(button3);
-	WidgetGroup * wdgGroup6 = new WidgetGroup(new QSpinBox, "Width");
-	WidgetGroup * wdgGroup7 = new WidgetGroup(new QSpinBox, "Height");
-	WidgetGroup * wdgGroup8 = new WidgetGroup(button1);
-
-	/*
-	 * add all widget groups to layout block 1
-	 */
-
-	block1->addWidget(wdgGroup3, 0, 0);
-
-	block1->addWidget(wdgGroup4, 0, 1);
-	block1->addWidget(wdgGroup5, 1, 1);
-
-	block1->addWidget(wdgGroup1, 0, 2);
-	block1->addWidget(wdgGroup2, 0, 4);
-
-	block1->addWidget(wdgGroup6, 1, 2);
-	block1->addWidget(wdgGroup8, 1, 3);
-	block1->addWidget(wdgGroup7, 1, 4);
-
-
-	/*
-	 * Setup second layout block
+	 * Setup second layout block 1
 	 */
 
 
-	layoutblock * block2 = new layoutblock;
 
+	sc_seg_xyz_position * blockPosition = new sc_seg_xyz_position();
+	sc_seg_xyz_transform * blockTransform = new sc_seg_xyz_transform();
+	sc_seg_xyz_advanced * blockXYZAdvanced = new sc_seg_xyz_advanced();
+	ScLayoutSection *sectionXYZ = new ScLayoutSection("X,Y,Z", blockXYZAdvanced, true);
+	sectionXYZ->addWidget(blockPosition);
+	sectionXYZ->addWidget(blockTransform);
 
-	/*
-	 * Setup all widget groups for layout block 2
-	 */
+	sc_seg_shape * blockShape = new sc_seg_shape();
+	ScLayoutSection *sectionShape = new ScLayoutSection("Shape");
+	sectionShape->addWidget(blockShape);
+	sectionShape->setToggleOff(true);
 
-	WidgetGroup * wdgGroup9 = new WidgetGroup(new QSpinBox, "Others");
-	WidgetGroup * wdgGroup10 = new WidgetGroup(new QSpinBox, "Label with some more text:", QBoxLayout::RightToLeft);
+	sc_seg_fills * blockFills = new sc_seg_fills();
+	ScLayoutSection *sectionFills = new ScLayoutSection("Fills", new QWidget(), true);
+	sectionFills->addWidget(blockFills);
 
-	/*
-	 * Add all widget groups to layout block 2
-	 */
+	sc_seg_lines * blockLines = new sc_seg_lines();
+	ScLayoutSection *sectionLines = new ScLayoutSection("Lines", new QWidget(), true);
+	sectionLines->addWidget(blockLines);
 
-	block2->addWidget(wdgGroup9, 0, 0);
-	block2->addWidget(wdgGroup10, 1, 0);
+	sc_seg_dropshadow * blockDropShadow = new sc_seg_dropshadow();
+	ScLayoutSection *sectionDropShadow = new ScLayoutSection("Drop Shadow", new QWidget(), true);
+	sectionDropShadow->addWidget(blockDropShadow);
+
 
 	/*
 	 * Setup floating layout and add all blocks to that
 	 */
 
-	FlowLayout *flowLayout = new FlowLayout(0,4,0);
-	flowLayout->setMargin(0);
-	flowLayout->setSpacing(0);
+	FlowLayout *flowLayout = new FlowLayout(0,0,0);
 
-	flowLayout->addWidget(block1);
-	flowLayout->addWidget(block2);
+	flowLayout->addWidget(sectionXYZ);
+	flowLayout->addWidget(sectionShape);
+	flowLayout->addWidget(sectionFills);
+	flowLayout->addWidget(sectionLines);
+	flowLayout->addWidget(sectionDropShadow);
 
 
 

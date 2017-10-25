@@ -53,13 +53,13 @@
 #include "flowlayout.h"
 //! [1]
 FlowLayout::FlowLayout(QWidget *parent, int margin, int hSpacing, int vSpacing)
-    : QLayout(parent), m_hSpace(hSpacing), m_vSpace(vSpacing)
+	: QLayout(parent), m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
     setContentsMargins(margin, margin, margin, margin);
 }
 
 FlowLayout::FlowLayout(int margin, int hSpacing, int vSpacing)
-    : m_hSpace(hSpacing), m_vSpace(vSpacing)
+	: m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
     setContentsMargins(margin, margin, margin, margin);
 }
@@ -158,7 +158,7 @@ QSize FlowLayout::minimumSize() const
     QSize size;
     QLayoutItem *item;
     foreach (item, itemList)
-        size = size.expandedTo(item->minimumSize());
+	   size = size.expandedTo(item->minimumSize());
 
     size += QSize(2*margin(), 2*margin());
     return size;
@@ -174,6 +174,7 @@ int FlowLayout::doLayout(const QRect &rect, bool testOnly) const
     int x = effectiveRect.x();
     int y = effectiveRect.y();
     int lineHeight = 0;
+
 //! [9]
 
 //! [10]
@@ -190,19 +191,40 @@ int FlowLayout::doLayout(const QRect &rect, bool testOnly) const
                 QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Vertical);
 //! [10]
 //! [11]
-        int nextX = x + item->sizeHint().width() + spaceX;
-        if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
-            x = effectiveRect.x();
-            y = y + lineHeight + spaceY;
-            nextX = x + item->sizeHint().width() + spaceX;
-            lineHeight = 0;
-        }
+		int nextX = x + item->sizeHint().width() + spaceX;
+		if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
+			x = effectiveRect.x();
+			y = y + lineHeight + spaceY;
+			nextX = x + item->sizeHint().width() + spaceX;
+			lineHeight = 0;
+		}
 
-        if (!testOnly)
-            item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
+		if (!testOnly)
+			item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
 
-        x = nextX;
-        lineHeight = qMax(lineHeight, item->sizeHint().height());
+		x = nextX;
+		lineHeight = qMax(lineHeight, item->sizeHint().height());
+
+
+//		int itemFit = w / (m_minColWidth + spaceX);
+//		//itemFit = qMin(itemFit, itemList.count()); // no space in horizontal stretching
+//		if (itemFit <= 0) itemFit = 1;
+//		int itemWidth = w / itemFit;
+
+//		int nextX = x + itemWidth;
+//		if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
+//			x = effectiveRect.x();
+//			y = y + lineHeight + spaceY;
+//			nextX = x + itemWidth;
+//			lineHeight = 0;
+//		}
+
+//		if (!testOnly)
+//			item->setGeometry(QRect(QPoint(x, y),QSize(itemWidth, item->sizeHint().height())));
+
+//		x = nextX;
+//		lineHeight = qMax(lineHeight, item->sizeHint().height());
+
     }
     return y + lineHeight - rect.y() + bottom;
 }

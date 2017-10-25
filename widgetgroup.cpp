@@ -33,13 +33,13 @@ WidgetGroup::WidgetGroup(QWidget *child, QString text, QBoxLayout::Direction dir
 	m_label = new QLabel();
 	m_label->setFont(font);
 	m_label->setAlignment(Qt::AlignCenter);
-	m_label->setBackgroundRole(QPalette::Window);
+	//m_label->setBackgroundRole(QPalette::Window);
 	m_label->setAutoFillBackground(true);
 	setLabel(m_text);
 
 	setWidget(m_child);
 
-	this->setBackgroundRole(QPalette::Highlight);
+	//this->setBackgroundRole(QPalette::Highlight);
 	this->setAutoFillBackground(true);
 
 }
