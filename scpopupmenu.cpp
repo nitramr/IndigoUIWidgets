@@ -1,7 +1,5 @@
 #include "scpopupmenu.h"
 #include <QEvent>
-#include <QPainter>
-#include <QDebug>
 #include <QBoxLayout>
 
 ScPopupMenu::ScPopupMenu(QWidget *widget)

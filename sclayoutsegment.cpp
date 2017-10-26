@@ -15,8 +15,7 @@ ScLayoutSegment::ScLayoutSegment(QWidget *parent) : QWidget(parent)
 	this->setLayout(m_layout);
 	this->setAutoFillBackground(true);
 
-	QFont font(this->font());
-	font.setPointSize(8);
+	this->setMinimumWidth(350);
 
 }
 

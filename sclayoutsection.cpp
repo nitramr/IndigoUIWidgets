@@ -89,7 +89,7 @@ void ScLayoutSectionHeader::setToggleState(){
 ScLayoutSection::ScLayoutSection(QString text, QWidget *menu, bool toggle, QWidget *parent) : QWidget(parent)
 {
 
-	this->setMinimumWidth(300);
+	//this->setMinimumWidth(300);
 	m_flowLayout = new FlowLayout();
 
 	m_header = new ScLayoutSectionHeader(text, menu, toggle);

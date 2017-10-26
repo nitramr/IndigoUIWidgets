@@ -10,6 +10,7 @@ sc_seg_fills::sc_seg_fills(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+
 	// Setup ScColorPicker in ScPopupMenu and add it to ScColorFillsBox
 	ScColorPicker * colorPicker = new ScColorPicker();
 	colorPicker->setFixedSize(100,100);
