@@ -3,7 +3,6 @@ QT += uitools
 
 HEADERS     = flowlayout.h \
               window.h \
-    widgetgroup.h \
     sc_seg_xyz_position.h \
     sc_seg_xyz_transform.h \
     sclayoutsection.h \
@@ -13,11 +12,12 @@ HEADERS     = flowlayout.h \
     sclayoutsegment.h \
     sc_seg_lines.h \
     sc_seg_dropshadow.h \
-    sc_seg_xyz_advanced.h
+    sc_seg_xyz_advanced.h \
+    sccolorfillsbox.h \
+    sccolorpicker.h
 SOURCES     = flowlayout.cpp \
               main.cpp \
               window.cpp \
-    widgetgroup.cpp \
     sc_seg_xyz_position.cpp \
     sc_seg_xyz_transform.cpp \
     sclayoutsection.cpp \
@@ -27,7 +27,9 @@ SOURCES     = flowlayout.cpp \
     sc_seg_fills.cpp \
     sc_seg_lines.cpp \
     sc_seg_dropshadow.cpp \
-    sc_seg_xyz_advanced.cpp
+    sc_seg_xyz_advanced.cpp \
+    sccolorfillsbox.cpp \
+    sccolorpicker.cpp
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/layouts/flowlayout
@@ -40,7 +42,8 @@ FORMS += \
     sc_seg_fills.ui \
     sc_seg_lines.ui \
     sc_seg_dropshadow.ui \
-    sc_seg_xyz_advanced.ui
+    sc_seg_xyz_advanced.ui \
+    sccolorpicker.ui
 
 RESOURCES += \
     assets.qrc

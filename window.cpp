@@ -50,11 +50,17 @@
 
 #include <QPushButton>
 
-#include "flowlayout.h"
+#include <QLabel>
+#include <QLineEdit>
+#include <QSpinBox>
+#include <QDebug>
+#include <QStyleFactory>
+
 #include "window.h"
+
+#include "flowlayout.h"
 #include "sclayoutsegment.h"
 #include "sclayoutsection.h"
-#include "widgetgroup.h"
 #include "sc_seg_xyz_position.h"
 #include "sc_seg_xyz_transform.h"
 #include "sc_seg_xyz_advanced.h"
@@ -62,11 +68,8 @@
 #include "sc_seg_fills.h"
 #include "sc_seg_lines.h"
 #include "sc_seg_dropshadow.h"
-#include <QLabel>
-#include <QLineEdit>
-#include <QSpinBox>
-#include <QDebug>
-#include <QStyleFactory>
+#include "sccolorfillsbox.h"
+
 
 Window::Window()
 {
@@ -74,7 +77,6 @@ Window::Window()
 	/*
 	 * Setup second layout block 1
 	 */
-
 
 
 	sc_seg_xyz_position * blockPosition = new sc_seg_xyz_position();
@@ -87,7 +89,6 @@ Window::Window()
 	sc_seg_shape * blockShape = new sc_seg_shape();
 	ScLayoutSection *sectionShape = new ScLayoutSection("Shape");
 	sectionShape->addWidget(blockShape);
-	sectionShape->setToggleOff(true);
 
 	sc_seg_fills * blockFills = new sc_seg_fills();
 	ScLayoutSection *sectionFills = new ScLayoutSection("Fills", new QWidget(), true);
@@ -100,6 +101,8 @@ Window::Window()
 	sc_seg_dropshadow * blockDropShadow = new sc_seg_dropshadow();
 	ScLayoutSection *sectionDropShadow = new ScLayoutSection("Drop Shadow", new QWidget(), true);
 	sectionDropShadow->addWidget(blockDropShadow);
+	sectionDropShadow->setToggleOff(true);
+
 
 
 	/*

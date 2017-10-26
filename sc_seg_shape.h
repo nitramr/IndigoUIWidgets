@@ -15,9 +15,10 @@ class sc_seg_shape : public ScLayoutSegment
 public:
 	explicit sc_seg_shape(QWidget *parent = 0);
 	~sc_seg_shape();
+	Ui::sc_seg_shape *ui;
 
 private:
-	Ui::sc_seg_shape *ui;
+
 };
 
 #endif // SC_SEG_SHAPE_H
