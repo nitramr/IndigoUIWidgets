@@ -2,11 +2,20 @@
 #include <QEvent>
 #include <QPainter>
 #include <QDebug>
+#include <QBoxLayout>
 
 ScPopupMenu::ScPopupMenu(QWidget *widget)
 {
+	QVBoxLayout *layout = new QVBoxLayout();
+	layout->addWidget(widget);
+	layout->setMargin(1);
+
+	QWidget *panel = new QWidget();
+	panel->setMinimumSize(widget->size());
+	panel->setLayout(layout);
+
 	QWidgetAction * action = new QWidgetAction(this);
-	action->setDefaultWidget(widget);
+	action->setDefaultWidget(panel);
 
 	widget->installEventFilter(this);
 
@@ -17,15 +26,10 @@ ScPopupMenu::ScPopupMenu(QWidget *widget)
 bool ScPopupMenu::eventFilter(QObject *obj, QEvent *event)
 {
 
-	if (event->type() == QEvent::Paint) {
-
-		QWidget *widget = qobject_cast<QWidget *>(obj);
-
-		QPainter painter(widget);
-
-		painter.setPen(QColor(128,128,128,128));
-		painter.setBrush(Qt::NoBrush);
-		painter.drawRect(QRect(0,0,widget->width()-1, widget->height()-1));
+	// prevent that menu is close by interact with the background
+	if (event->type() == QEvent::MouseButtonPress ||
+			event->type() == QEvent::MouseButtonDblClick ||
+			event->type() == QEvent::MouseMove) {
 
 		return true;
 	}

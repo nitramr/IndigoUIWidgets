@@ -16,7 +16,7 @@ private:
 	void paintEvent(QPaintEvent *);
 
 public slots:
-		void setPixmap(QPixmap fills);
+	void setPixmap(QPixmap fills);
 };
 
 #endif // SCCOLORFILLSBOX_H
